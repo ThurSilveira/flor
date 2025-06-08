@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Buquê de Rosas</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(to bottom, #1a001f, #330033);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      position: relative;
+    }
+
+    .bouquet {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .flowers {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: -30px;
+    }
+
+    .rose {
+      width: 50px;
+      height: 50px;
+      position: relative;
+      background: #d61c4e;
+      border-radius: 50%;
+      box-shadow: inset -5px -5px 10px rgba(0,0,0,0.2);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .rose::before,
+    .rose::after {
+      content: '';
+      position: absolute;
+      background: #e63956;
+      border-radius: 50%;
+    }
+
+    .rose::before {
+      width: 40px;
+      height: 40px;
+      top: -10px;
+      left: 5px;
+    }
+
+    .rose::after {
+      width: 30px;
+      height: 30px;
+      bottom: -5px;
+      right: 5px;
+    }
+
+    .stem {
+      width: 6px;
+      height: 80px;
+      background: #2e8b57;
+      border-radius: 3px;
+      margin-top: -20px;
+    }
+
+    .leaf {
+      width: 20px;
+      height: 10px;
+      background: #3cb371;
+      position: absolute;
+      border-radius: 10px 0 10px 0;
+    }
+
+    .leaf.left {
+      left: -20px;
+      top: 30px;
+      transform: rotate(-30deg);
+    }
+
+    .leaf.right {
+      right: -20px;
+      top: 30px;
+      transform: rotate(30deg);
+    }
+
+    .vase {
+      width: 80px;
+      height: 100px;
+      background: linear-gradient(to bottom, #8b4513, #5c3317);
+      border-radius: 0 0 40px 40px;
+      margin-top: -10px;
+      box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1), 0 5px 15px rgba(0, 0, 0, 0.6);
+      position: relative;
+      z-index: 2;
+    }
+
+    .vase::before {
+      content: '';
+      position: absolute;
+      top: -15px;
+      left: 10px;
+      width: 60px;
+      height: 20px;
+      background: #5c3317;
+      border-radius: 50%;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Partículas */
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 192, 203, 0.7);
+      border-radius: 50%;
+      animation: particle 8s linear infinite;
+    }
+
+    @keyframes particle {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-800px) scale(0.5);
+        opacity: 0;
+      }
+    }
+
+    /* Responsivo */
+    @media (max-width: 500px) {
+      .rose, .rose::before, .rose::after {
+        width: 35px;
+        height: 35px;
+      }
+
+      .rose::before {
+        top: -8px;
+      }
+
+      .rose::after {
+        bottom: -5px;
+      }
+
+      .vase {
+        width: 60px;
+        height: 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bouquet">
+    <div class="flowers">
+      <div class="rose"></div>
+      <div class="rose"></div>
+      <div class="rose"></div>
+      <div class="rose"></div>
+      <div class="rose"></div>
+      <div class="rose"></div>
+    </div>
+    <div class="stem"></div>
+    <div class="leaf left"></div>
+    <div class="leaf right"></div>
+    <div class="vase"></div>
+  </div>
+
+  <!-- Partículas -->
+  <script>
+    for (let i = 0; i < 50; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = `${Math.random() * window.innerWidth}px`;
+      particle.style.top = `${Math.random() * window.innerHeight}px`;
+      particle.style.animationDuration = `${5 + Math.random() * 5}s`;
+      document.body.appendChild(particle);
+    }
+  </script>
+</body>
+</html>
